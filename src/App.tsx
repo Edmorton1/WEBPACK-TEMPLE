@@ -4,10 +4,6 @@ import Linux from "@/assets/logo.svg"
 // ДЛЯ АССИНХРОННЫХ ОПЕРАЦИЙ ИСПОЛЬЗОВАТЬ suspense
 
 function App() {
-  function todo(a: number) {
-    throw new Error('asdasdasdsad')
-  }
-  todo('a')
   return (
     <>
     <h1 data-testid={'superSEX'}>PLATFORM: {__PLATFORM__}</h1>
