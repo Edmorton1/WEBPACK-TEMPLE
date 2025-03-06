@@ -1,50 +1,29 @@
 import path from 'path';
-import webpack from 'webpack';
-import HTMLWebpackPlugin from 'html-webpack-plugin'
 import 'webpack-dev-server';
+import { buildWebpack } from './config/build/buildWebpack';
+import { WebpackConfiguration } from 'webpack-dev-server';
+import { buildMode, buildPlatform } from 'config/types/types';
 
 interface envTypes {
-	mode: 'production' | 'development'
-	port: number
+	mode?: buildMode
+	port?: number,
+	platform?: buildPlatform,
+	analyzer?: boolean
 }
 
 export default (env:envTypes) => {
-	const isDev = env.mode == 'development';
-	const isProd = env.mode == 'production';
-
-	const config: webpack.Configuration = {
-		mode: env.mode ?? "development",
-		entry: './src/index.tsx',
-		output: {
-			path: path.resolve(__dirname, 'build'),
-			filename: '[name].[contenthash].js',
-			clean: true
+	const config: WebpackConfiguration = buildWebpack({
+		port: env.port || 5000,
+		mode: env.mode || 'development',
+		platform: env.platform || 'desktop',
+		paths: {
+			entry: path.resolve(__dirname, 'src', 'index.tsx'),
+			output: path.resolve(__dirname, 'build'),
+			html: path.resolve(__dirname, 'public', 'index.html'),
+			src: path.resolve(__dirname, 'src'),
+			public: path.resolve(__dirname, 'public')
 		},
-		plugins: [
-			new HTMLWebpackPlugin({template: './public/index.html'}),
-			new webpack.ProgressPlugin()
-		],
-		module: {
-			rules: [
-				{
-					test: /\.tsx?$/,
-					use: "ts-loader",
-					exclude: /node_modules/,
-				}
-			]
-		},
-		resolve: {
-			extensions: ['.tsx', '.ts', '.js']
-		},
-		devtool: isDev && 'inline-source-map',
-		devServer:  isDev ? {
-			// static: {
-			// 	directory: path.join(__dirname, 'public'),
-			// },
-			open: true,
-			// compress: true,
-			port: env.port ?? '5000',
-		} : undefined,
-	}
+		analyzer: env.analyzer
+	})
 	return config
 };

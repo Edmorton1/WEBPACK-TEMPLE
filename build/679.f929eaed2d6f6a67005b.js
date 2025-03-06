@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkwebpack=self.webpackChunkwebpack||[]).push([[679],{679:(e,t,c)=>{c.r(t),c.d(t,{default:()=>a});const a=function(){return React.createElement(React.Fragment,null,React.createElement("div",null,"About"))}}}]);
