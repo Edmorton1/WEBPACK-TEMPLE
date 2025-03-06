@@ -5,12 +5,13 @@ import Linux from "@/assets/logo.svg"
 
 function App() {
   function todo(a: number) {
-
+    throw new Error('asdasdasdsad')
   }
   todo('a')
   return (
     <>
     <h1 data-testid={'superSEX'}>PLATFORM: {__PLATFORM__}</h1>
+    {/* <button onClick={() => todo(12)}>asdadasd</button> */}
     <div data-testid={'App'}>
       <Linux fill="red"/>
     </div>
