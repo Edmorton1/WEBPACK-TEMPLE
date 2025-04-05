@@ -1,8 +1,8 @@
 import path from 'path';
 import 'webpack-dev-server';
-import { buildWebpack } from './config/build/buildWebpack';
+import { buildWebpack } from './config/buildWebpack';
 import { WebpackConfiguration } from 'webpack-dev-server';
-import { buildMode, buildPlatform } from 'config/types/types';
+import { buildMode, buildPlatform } from 'config/types';
 
 interface envTypes {
 	mode?: buildMode
@@ -18,7 +18,7 @@ export default (env:envTypes) => {
 		platform: env.platform || 'desktop',
 		paths: {
 			entry: path.resolve(__dirname, 'src', 'index.tsx'),
-			output: path.resolve(__dirname, 'build'),
+			output: path.resolve(__dirname, 'dist'),
 			html: path.resolve(__dirname, 'public', 'index.html'),
 			src: path.resolve(__dirname, 'src'),
 			public: path.resolve(__dirname, 'public')

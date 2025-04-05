@@ -1,27 +1,12 @@
-import React, { Suspense } from "react";
+import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router";
 import App from "./App";
-import { LazyAbout, LazyShop } from "@/pages/index.lazy";
 
 const domNode = document.getElementById('root');
 const root = ReactDOM.createRoot(domNode);
 
-const router = createBrowserRouter([{
-    path: '/',
-    element: <App />,
-    children: [
-        {
-            path: '/about',
-            element:  <Suspense fallback="loading..."><LazyAbout /></Suspense>
-        },
-        {
-            path: '/shop',
-            element: <Suspense fallback="loading..."><LazyShop /></Suspense>
-
-        }
-    ]
-}])
 root.render(
-    <RouterProvider router={router}/>
+    <StrictMode>
+        <App />
+    </StrictMode>
 )

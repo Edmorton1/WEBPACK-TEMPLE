@@ -1,20 +1,18 @@
-import { Outlet, BrowserRouter as Router, Link } from 'react-router-dom';
-import Grape from "@/assets/GRAPE.png"
-import Linux from "@/assets/logo.svg"
+import { BrowserRouter, Routes, Route } from "react-router";
+import { LazyMain } from "@/components/index.lazy";
+import { ErrorBoundary } from "react-error-boundary";
+import Fallback from "@/Fallback";
 // ДЛЯ АССИНХРОННЫХ ОПЕРАЦИЙ ИСПОЛЬЗОВАТЬ suspense
 
 function App() {
   return (
-    <>
-    <h1 data-testid={'superSEX'}>PLATFORM: {__PLATFORM__}</h1>
-    {/* <button onClick={() => todo(12)}>asdadasd</button> */}
-    <div data-testid={'App'}>
-      <Linux fill="red"/>
-    </div>
-    <Link to={'/about'}>About</Link>
-    <Link to={'/shop'}>About</Link>
-    <Outlet />
-    </>
+    <ErrorBoundary FallbackComponent={Fallback}>
+        <BrowserRouter>
+            <Routes>
+                <Route index element={<LazyMain />} />
+            </Routes>
+        </BrowserRouter>
+    </ErrorBoundary>
   );
 }
 
